@@ -6,3 +6,4 @@ Backup-Sessions/
 tmp/
 data.store.json
 database.json
+yarn-error.log
