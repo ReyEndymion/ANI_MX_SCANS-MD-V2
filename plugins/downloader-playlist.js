@@ -1,0 +1,48 @@
+/* Created by https://github.com/BrunoSobrino */
+       /* Diseño by Yameko-Bot V1*/
+
+import yts from "yt-search"
+import fs from 'fs'
+let handler = async (m, { text, conn, args, command, usedPrefix }) => {
+if (!text) throw `*[!INFO!] NOMBRE DE LA CANCION FALTANTE, POR FAVOR INGRESE EL COMANDO MAS EL NOMBRE/TITULO DE UNA CANCION*\n\n*— EJEMPLO:*\n*${usedPrefix + command} Begin you*`    
+try {
+let imagen1 = fs.readFileSync('./src/nuevobot.jpg') 
+let search = await yts(args.join(" "))
+let listSerch = []
+let teskd = `Musica relacionada con: ${args.join(" ")}`
+const sections = [{
+title: `|-----{ *AUDIO* }-----|`,
+rows: listSerch }]
+const listMessage = {
+text: teskd,
+footer: 'Elija una opcion y precione Enviar',
+title: " *MUSICA RELACIONADA*",
+buttonText: "[** RESULTADOS **]",
+sections}
+const fake = { quoted: {
+key : {
+remoteJid: '6283136505591-1614953337@g.us',
+participant : '0@s.whatsapp.net'},
+message: {
+orderMessage: {
+itemCount: 9999999,
+status: 1,
+surface: 1,
+message: 'ANI MX SCANS', 
+orderTitle: `ANIMXSCANS`,
+thumbnail: imagen1, 
+sellerJid: '0@s.whatsapp.net'}}}}
+if (command == 'playlist') {
+for (let i of search.all) {
+listSerch.push({title: i.title, description: `Autor: ${i.author.name} / ${i.timestamp}`, rowId: `${usedPrefix}ytmp3 ${i.url}`})} 
+await conn.sendMessage(m.chat, listMessage, fake)}
+if (command == 'playlist2') {
+for (let i of search.all) {
+listSerch.push({title: i.title, description: `Autor: ${i.author.name} / ${i.timestamp}`, rowId: `${usedPrefix}ytmp4 ${i.url}`})} 
+await conn.sendMessage(m.chat, listMessage, fake)} 
+} catch (e) {
+m.reply('*[!INFO!] ERROR, POR FAVOR VUELVA A INTENTARLO CON OTRO NOMBRE DE UNA CANCION*')
+console.log(e)
+}}
+handler.command = /^playlist|playlist2$/i
+export default handler
