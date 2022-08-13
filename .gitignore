@@ -1,0 +1,8 @@
+audio/
+/.circleci/
+sessions/
+node_modules/
+Backup-Sessions/
+tmp/
+data.store.json
+database.json
