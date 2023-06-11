@@ -5,11 +5,11 @@ else who = m.sender
 let name = conn.getName(who) 
 m.reply(`
 ┌───⊷ *BALANCE* ⊶
-▢ *Nombrename}
+▢ *Nombre:* ${name}
 ▢ *Diamantes:* ${db.data.users[who].limit}💎
 └──────────────
 *NOTA:* 
-*Puedes comprar diamantes 💎  usando los comandos*
+*Puedes comprar diamantes 💎 usando los comandos*
 ❏ *${usedPrefix}buy <cantidad>*
 ❏ *${usedPrefix}buyall*`)
 }

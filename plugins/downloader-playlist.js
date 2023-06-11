@@ -1,48 +1,49 @@
-/* Created by https://github.com/BrunoSobrino */
-       /* Dise�o by Yameko-Bot V1*/
+import { youtubeSearch } from '@bochilteam/scraper';
 
-import yts from "yt-search"
-import fs from 'fs'
-let handler = async (m, { text, conn, args, command, usedPrefix }) => {
-if (!text) throw `*[!INFO!] NOMBRE DE LA CANCION FALTANTE, POR FAVOR INGRESE EL COMANDO MAS EL NOMBRE/TITULO DE UNA CANCION*\n\n*� EJEMPLO:*\n*${usedPrefix + command} Begin you*`    
-try {
-let imagen1 = fs.readFileSync('./src/nuevobot.jpg') 
-let search = await yts(args.join(" "))
-let listSerch = []
-let teskd = `Musica relacionada con: ${args.join(" ")}`
-const sections = [{
-title: `|-----{ *AUDIO* }-----|`,
-rows: listSerch }]
-const listMessage = {
-text: teskd,
-footer: 'Elija una opcion y precione Enviar',
-title: " *MUSICA RELACIONADA*",
-buttonText: "[** RESULTADOS **]",
-sections}
-const fake = { quoted: {
-key : {
-remoteJid: '6283136505591-1614953337@g.us',
-participant : '0@s.whatsapp.net'},
-message: {
-orderMessage: {
-itemCount: 9999999,
-status: 1,
-surface: 1,
-message: 'ANI MX SCANS', 
-orderTitle: `ANIMXSCANS`,
-thumbnail: imagen1, 
-sellerJid: '0@s.whatsapp.net'}}}}
-if (command == 'playlist') {
-for (let i of search.all) {
-listSerch.push({title: i.title, description: `Autor: ${i.author.name} / ${i.timestamp}`, rowId: `${usedPrefix}ytmp3 ${i.url}`})} 
-await conn.sendMessage(m.chat, listMessage, fake)}
-if (command == 'playlist2') {
-for (let i of search.all) {
-listSerch.push({title: i.title, description: `Autor: ${i.author.name} / ${i.timestamp}`, rowId: `${usedPrefix}ytmp4 ${i.url}`})} 
-await conn.sendMessage(m.chat, listMessage, fake)} 
-} catch (e) {
-m.reply('*[!INFO!] ERROR, POR FAVOR VUELVA A INTENTARLO CON OTRO NOMBRE DE UNA CANCION*')
-console.log(e)
-}}
-handler.command = /^playlist|playlist2$/i
-export default handler
+let handler = async (m, { conn, args, usedPrefix, command, text }) => {
+  if (!text) throw `*[❗INFO❗] NOMBRE DE LA CANCION FALTANTE, POR FAVOR INGRESE EL COMANDO MAS EL NOMBRE/TITULO DE UNA CANCION*\n\n*—◉ EJEMPLO:*\n*${usedPrefix + command} Begin you*`;
+
+  try {
+    const { video } = await youtubeSearch(text);
+    const listSections = [];
+
+    let teks = [...video].map(v => {
+      switch (v.type) {
+        case 'video': {
+          listSections.push(`*Título:* ${v.title}\n\nCopia y usa el comando\n\n'Video 🎥' => ${usedPrefix}ytmp4 ${v.url}\n\n'Videodoc 🎥' => ${usedPrefix}ytmp4doc ${v.url}\n\n'Audio 🎧', => ${usedPrefix}ytmp3 ${v.url}\n\n'Audiodoc 🎧', => ${usedPrefix}ytmp3doc ${v.url}`);
+          break;
+        }
+      }
+    }).filter(v => v).join('\n\n========================\n\n');
+let resp = `『*MUSICA RELACIONADA* 』\n\nMusica relacionada con: ${args.join(" ")}\n${listSections}\n\n`
+let txt = '';
+let count = 0;
+for (const c of resp) {
+    await new Promise(resolve => setTimeout(resolve, 5));
+    txt += c;
+    count++;
+
+    if (count % 10 === 0) {
+        conn.sendPresenceUpdate('composing' , m.chat);
+    }
+}
+    await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} );
+  } catch (e){
+    let resp = '*[❗INFO❗] ERROR, POR FAVOR VUELVA A INTENTARLO CON OTRO NOMBRE DE UNA CANCION*\n\n'
+    let txt = '';
+    let count = 0;
+    for (const c of resp) {
+        await new Promise(resolve => setTimeout(resolve, 5));
+        txt += c;
+        count++;
+    
+        if (count % 10 === 0) {
+            conn.sendPresenceUpdate('composing' , m.chat);
+        }
+    }
+        await conn.sendMessage(m.chat, { text: txt.trim()+e, mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} )	
+  }
+};
+
+handler.command = /^playlist|playlist2$/i;
+export default handler;

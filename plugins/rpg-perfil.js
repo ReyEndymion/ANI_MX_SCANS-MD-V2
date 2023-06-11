@@ -1,10 +1,10 @@
-import db from '../lib/database.js'
 import { createHash } from 'crypto'
 import PhoneNumber from 'awesome-phonenumber'
 import fetch from 'node-fetch'
 let handler = async (m, { conn, usedPrefix, participants }) => {
 let pp = 'https://i.imgur.com/WHjtUae.jpg'
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+if (!(who in db.data.users)) throw `El usuario que está mencionando no está registrado en mi base de datos`
 try {
 pp = await conn.profilePictureUrl(who)
 } catch (e) {
@@ -20,10 +20,10 @@ let str = `*NOMBRE:* ${username} ${registered ? '(' + name + ') ': ''}
 *LIMITE:* ${limit} USOS
 *REGISTRADO:* ${registered ? 'Si': 'No'}
 *PREMIUM:* ${prem ? 'Si' : 'No'}
-*NUMERO DE SERIE* 
-${sn}`
-conn.sendButton(m.chat, str, author, pp, [['MENU PRINCIPAL', '/menu']], m)
-}}
+*NUMERO DE SERIE:* ${sn}\n\n[['MENU PRINCIPAL' usa: '/menu']]`
+conn.sendMessage(m.chat, {image:{url: pp}, caption: str + ' ' + wm}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} )
+}
+}
 handler.help = ['profile [@user]']
 handler.tags = ['xp']
 handler.command = /^perfil|profile?$/i

@@ -3,14 +3,14 @@ import { sizeFormatter } from 'human-readable'
 let formatSize = sizeFormatter({
 std: 'JEDEC', decimalPlaces: 2, keepTrailingZeroes: false, render: (literal, symbol) => `${literal} ${symbol}B` })
 let handler = async (m, { conn, args }) => {
-if (!args[0]) throw '*[!INFO!] ERROR, POR FAVOR VUELVE A INTENTARLO*\n\n*- CORROBORA QUE EL ENLACE SEA SIMILAR A:*\n*? https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*' 
+if (!args[0]) throw '*[❗INFO❗] ERROR, POR FAVOR VUELVA A INTENTARLO*\n\n*- CORROBORE QUE EL ENLACE SEA SIMILAR A:*\n*◉ https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*' 
 try {
 GDriveDl(args[0]).then(async (res) => {
-conn.reply(m.chat, '_Descargando su archivo, espera un momento_...\n\n*_El tiempo puede variar dependiendo del peso del archivo, si el peso supera los 100 MB puede que su archivo no sea enviado_*', m)
+conn.reply(m.chat, '_Descargando su archivo, espere un momento..._\n\n_El tiempo de espera puede variar dependiendo del peso del archivo, si el peso supera los 100 MB puede que su archivo no sea enviado', m)
 if (!res) throw res
 conn.sendFile(m.chat, res.downloadUrl, res.fileName, '', m, null, { mimetype: res.mimetype, asDocument: true })})
 }catch(e){
-m.reply('*[!INFO!] ERROR, POR FAVOR VUELVE A INTENTARLO*\n\n*- CORROBORA QUE EL ENLACE SEA SIMILAR A:*\n*? https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*')
+m.reply('*[❗INFO❗] ERROR, POR FAVOR VUELVA A INTENTARLO*\n\n*- CORROBORE QUE EL ENLACE SEA SIMILAR A:*\n*◉ https://drive.google.com/file/d/1dmHlx1WTbH5yZoNa_ln325q5dxLn1QHU/view*')
 console.log(e)}}
 handler.command = /^(gdrive)$/i
 export default handler

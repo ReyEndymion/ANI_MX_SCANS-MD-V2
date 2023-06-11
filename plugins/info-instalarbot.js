@@ -1,4 +1,3 @@
-import fs from 'fs'
 let handler  = async (m, { conn, command, args, usedPrefix, DevMode }) => {
 let text = `
 *—◉ TUTORIAL BOXMINE HOST*
@@ -6,6 +5,14 @@ let text = `
 > Pagina Oficial: https://boxmineworld.com
 > Dashboard: https://dash.boxmineworld.com/home
 > Panel: https://panel.boxmineworld.com
+> Soporte: https://discord.gg/84qsr4v 
+
+------------------------------------
+
+*—◉ TUTORIAL ACIDICNODES HOST*
+> Tutorial: https://youtu.be/nbjvreJ0tUk
+> Pagina: https://billing.acidicnodes.ml/register?ref=ADII104p
+> Soporte: https://whatsapp.acidicnodes.com
 
 ------------------------------------
 
@@ -24,14 +31,14 @@ let text = `
 > yarn install 
 > npm install
 > npm update
-> npm start
-`.trim()   
-conn.reply(m.chat, text, m, {
+> npm install 
+> npm start` 
+m.reply(text/*, m.chat, m, {
 contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, 
 title: 'INFORMACION - INSTALARBOT',
-body: 'ᴛʜᴇ ᴍʏsᴛᴄ ﹣ ʙᴏᴛ',         
+body: '🌎ANI MX SCANS🌏',         
 previewType: 0, thumbnail: fs.readFileSync("./Menu2.jpg"),
-sourceUrl: `https://github.com/ReyEndymion/ANI_MX_SCANS-MD`}}})   
+sourceUrl: `https://www.facebook.com/ANIMxSCANS`}}}*/)   
 }
 handler.command = /^(instalarbot)/i
 export default handler

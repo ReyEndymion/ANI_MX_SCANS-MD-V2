@@ -1,9 +1,8 @@
-import db from '../lib/database.js'
 export function before(m) {
     let user = db.data.users[m.sender]
     if (user.afk > -1) {
         m.reply(`
-  *[❗INFO❗] DEJASTE DE ESTAR INACTIVO (AFK)${user.afkReason ? ' DESPUES DE ESTAR INACTIVO (AAF) POR EL MOTIVO: ' + user.afkReason : ''}*
+  *[❗INFO❗] DEJASTE DE ESTAR INACTIVO (AFK)${user.afkReason ? ' DESPUES DE ESTAR INACTIVO (AFK) POR EL MOTIVO: ' + user.afkReason : ''}*
   
   *—◉ TIEMPO DE INACTIVIDAD (AFK): ${(new Date - user.afk).toTimeString()}*
   `.trim())

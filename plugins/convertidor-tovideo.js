@@ -3,7 +3,7 @@ import { ffmpeg } from '../lib/converter.js'
 let handler = async (m, { conn, usedPrefix, command }) => {
 if (!m.quoted) throw `*[❗INFO❗] RESPONDA AL AUDIO QUE DESEA CONVERTIR EN VIDEO CON EL COMANDO ${usedPrefix + command}*`
 let mime = m.quoted.mimetype || ''
-if (!/webp|audio/.test(mime)) throw `*[❗INFO❗] RESPONDA AL AUDIO QUE DESEA CONVERTIR EN VIDEO CON EL COMANDO ${usedPrefix + command}*`
+if (!/webp/.test(mime)) throw `*[❗INFO❗] RESPONDA AL AUDIO QUE DESEA CONVERTIR EN VIDEO CON EL COMANDO ${usedPrefix + command}*`
 let media = await m.quoted.download()
 let out = Buffer.alloc(0)
 if (/webp/.test(mime)) {
@@ -21,5 +21,5 @@ await conn.sendFile(m.chat, out, 'error.mp4', '*DONE*', m, 0, { thumbnail: out }
 }
 handler.help = ['tovideo']
 handler.tags = ['sticker']
-handler.command = ['tovideo', 'tomp4', 'mp4']
+handler.command = ['tovideo', 'tomp4', 'mp4', 'togif']
 export default handler

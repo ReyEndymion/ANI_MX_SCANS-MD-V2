@@ -8,6 +8,7 @@ import path, { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import moment from 'moment-timezone' 
 import { platform } from 'process'
+import db, { loadDatabase } from './lib/database.js'
 global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString() }; global.__dirname = function dirname(pathURL) { return path.dirname(global.__filename(pathURL, true)) }; global.__require = function require(dir = import.meta.url) { return createRequire(dir) }
 const __dirname = global.__dirname(import.meta.url)
 global.owner = [
@@ -63,9 +64,14 @@ global.APIKeys = {
   'https://api.botcahx.biz.id': 'Admin'
 }
 
+global.db = db
+global.loadDatabase = (db.data == null)? loadDatabase() : db.data
 global.raiz = './'
 global.aniD = 'ANI_MX_SCANS/'
 global.dirP = raiz//+aniD
+global.authFile = join(__dirname, `ANIMXSCANS/`)
+global.authFileRespald = join(__dirname, `sesionRespaldo/`)
+global.temp = join(__dirname, 'tmp')
 global.media = raiz+'media/'
 global.jadibts = join(__dirname, 'jadibts/')
 global.imagen1 = fs.readFileSync('./Menu2.jpg')
@@ -75,6 +81,18 @@ global.imagen4 = fs.readFileSync('./Menu.png')
 global.stickerAMX = fs.readFileSync('./ANIMXSCANS.webp')
 global.mods = [] 
 
+if (!fs.existsSync(jadibts)) {
+  fs.mkdirSync(jadibts);
+  console.log('Directorio jadibts creado exitosamente');
+}
+if (!fs.existsSync(authFileRespald)) {
+  fs.mkdirSync(authFileRespald);
+  console.log('Directorio sesionRespaldo creado exitosamente');
+}
+if (!fs.existsSync(temp)) {
+  fs.mkdirSync(temp);
+  console.log('Directorio tmp creado exitosamente');
+}
 
 /*************************/
 global.cheerio = cheerio

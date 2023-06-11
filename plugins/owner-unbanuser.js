@@ -1,4 +1,3 @@
-import db from '../lib/database.js'
 let handler = async (m, { conn, text}) => {
 if (!text) throw '*[❗INFO❗] INGRESA EL @tag DE ALGUN USUARIO*'
 let who

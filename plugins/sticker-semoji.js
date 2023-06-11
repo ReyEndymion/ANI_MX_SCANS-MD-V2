@@ -1,11 +1,11 @@
 import { sticker } from '../lib/sticker.js'
-import MessageType from '@adiwajshing/baileys'
+import MessageType from '@whiskeysockets/baileys'
 import { EmojiAPI } from 'emoji-api' 
 const emoji = new EmojiAPI()
 
 let handler = async (m, { conn, args, usedPrefix, command, isPrems }) => {
 let er = `
-*[❗] EL USO CORRECTO DEL COMANDO ES*
+*[❗] EL USO CORRECTO DE ESTE COMANDO ES*
 *◉ ${usedPrefix + command} <tipo> <emoji>*
 
 *—◉ EJEMPLO:*
@@ -26,7 +26,7 @@ let er = `
 *◉ sa = samsung*
 *◉ tw = twitter*
 
-*—◉ SOLO USAR UN EMO𝙹I Y RESPETE LOS ESPACIOS*`
+*—◉ SOLO USAR UN EMOJI Y RESPETE LOS ESPACIOS*`
 
 if (!args[0]) throw er
 let template = (args[0] || '').toLowerCase()

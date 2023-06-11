@@ -25,7 +25,7 @@ status: link.status,
 Pesan: eror}
 return notFond}}
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) throw `*[❗️INFO❗️] ESTAS USANDO MAL EL COMANDO!!*\n*USO CORRECTO:*\n*${usedPrefix + command} P𝚊𝚕𝚊𝚋𝚛𝚊 𝚌𝚕𝚊𝚟𝚎 𝚊 𝚋𝚞𝚜𝚌𝚊𝚛*\n\n*EJEMPLO:*\n*${usedPrefix + command} Estrellas*`
+if (!text) throw `*[❗️INFO❗️] ESTAS USANDO MAL EL COMANDO!!*\n*USO CORRECTO:*\n*${usedPrefix + command} palabra clave a buscar*\n\n*EJEMPLO:*\n*${usedPrefix + command} Estrellas*`
 wikipedia(`${text}`).then(res => {
 m.reply(`*AQUI TIENES LA INFORMACION ENCONTRADA:*\n\n` + res.result.isi)
 }).catch(() => { m.reply('*[❗️INFO❗️] NO SE ENCONTRO NINGUNA INFORMACION, PRUEBA QUE HAYAS ESCRITO UNA SOLA PALABRA Y LO HAYAS ESCRITO CORRECTAMENTE*') })}

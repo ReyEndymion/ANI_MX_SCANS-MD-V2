@@ -1,5 +1,4 @@
-import db from '../lib/database.js'
-let { downloadContentFromMessage } = (await import('@adiwajshing/baileys'));
+let { downloadContentFromMessage } = (await import('@whiskeysockets/baileys'));
 
 export async function before(m, { isAdmin, isBotAdmin }) {
  

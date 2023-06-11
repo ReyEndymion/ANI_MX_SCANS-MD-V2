@@ -1,6 +1,6 @@
 let handler = async (m, { conn, text, isROwner, isOwner }) => {
 if (text) {
-global.db.data.chats[m.chat].sBye = text
+db.data.chats[m.chat].sBye = text
 m.reply('*[❗] MENSAJE DE DESPEDIDA CONFIGURADO CORRECTAMENTE PARA ESTE GRUPO*')
 } else throw `*[❗] INGRESE EL MENSAJE DE DESPEDIDA QUE DESEE AGREGAR, USE:*\n*- @user (mención)*`
 }

@@ -2,14 +2,19 @@
 node_modules/
 Moviles/
 ANI_MX_SCANS/
+sessions/
 ANIMXSCANS/
+tmp/
 sesionRespaldo/
 /.git/
 #| Files |#
 creds.json
 database.json
+data.store.json
 BotComedia.data.json
 session.data.json
 ANI_MX_SCANS-MD.zip
 package-lock.json
+yarn.lock
 ANIMXSCANS.zip
+sync.ffs_db

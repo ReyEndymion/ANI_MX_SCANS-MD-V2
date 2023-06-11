@@ -1,49 +1,54 @@
-import db from '../lib/database.js'
-import Connection from '../lib/connection.js'
+import { generateWAMessageFromContent } from '@whiskeysockets/baileys'
 import os from 'os'
 import util from 'util'
 import sizeFormatter from 'human-readable'
-import MessageType from '@adiwajshing/baileys'
+import MessageType from '@whiskeysockets/baileys'
 import fs from 'fs'
 import { performance } from 'perf_hooks'
-let handler = async (m, { conn, usedPrefix }) => {
+let handler = async (m, { conn, usedPrefix, participants }) => {
 let _uptime = process.uptime() * 1000
 let uptime = clockString(_uptime) 
 let totalreg = Object.keys(db.data.users).length
-const chats = Object.entries(Connection.store.chats).filter(([id, data]) => id && data.isChats)
+const chats = Object.entries(conn.chats).filter(([id, data]) => id && data.isChats)
 const groupsIn = chats.filter(([id]) => id.endsWith('@g.us'))
 const groups = chats.filter(([id]) => id.endsWith('@g.us'))
 const used = process.memoryUsage()
-const { restrict } = db.data.settings[conn.user.jid] || {}
-const { autoread } = global.opts
+const { restrict, antiCall, antiprivado } = db.data.settings[conn.user.jid] || {}
+const { autoread, gconly, pconly, self } = global.opts || {}
 let old = performance.now()
 let neww = performance.now()
 let speed = neww - old
+let ow = global.owner.filter(entry => typeof entry[0] === 'string' && !isNaN(entry[0])).map(entry => ({ jid: entry[0] })).slice(0).map(({jid}) => `${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]}`).join` y `
 let info = `
-╠═〘 INFO 𝐃𝐄L 𝐁𝐎T 〙 ═
-╠
-╠➥ [🤴🏻] CREADOR: *𝓡𝓮𝔂 𝓔𝓷𝓭𝔂𝓶𝓲𝓸𝓷*
-╠➥ [#️⃣] No. DEL CREADOR: *wa.me/5215517489568*
+hola @${m.sender.split`@`[0]}
+╠═〘 INFO DEL BOT 〙 ═
+╠${wm} by ${igfg}
+╠➥ [🤴🏻] CREADOR: ${ow}
 ╠➥ [🎳] PREFIJO: *${usedPrefix}*
 ╠➥ [🔐] CHATS PRIVADOS: *${chats.length - groups.length}*
 ╠➥ [🦜] CHATS DE GRUPOS: *${groups.length}* 
 ╠➥ [💡] CHATS TOTALES: *${chats.length}* 
 ╠➥ [🚀] ACTIVIDAD: *${uptime}*
-╠➥ [🎩] USUARIOS: *${totalreg} 𝚗𝚞𝚖𝚎𝚛𝚘𝚜*
-╠➥ [👨‍🦯] VELOCIDAD: 
-╠  *${speed}* 
-╠  *𝚖𝚒𝚕𝚒𝚜𝚎𝚐𝚞𝚗𝚍𝚘𝚜*
+╠➥ [🎩] USUARIOS: *${totalreg} NUMEROS*
 ╠➥ [☑️] AUTOREAD: ${autoread ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'}
 ╠➥ [❗] RESTRICT: ${restrict ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'} 
-╠
-╠═〘 *🌎ANI MX SCANS🌏* 〙 ═
+╠➥ [💬] ANTIPRIVADO: ${antiprivado ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'}
+╠➥ [📵] ANTILLAMADA: ${antiCall ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'}
+╠➥ [💬] PCONLY: ${pconly ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'}
+╠➥ [🏢] GCONLY: ${gconly ? '*𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*' : '*𝚍𝚎𝚜𝚊𝚌𝚝𝚒𝚟𝚊𝚍𝚘*'}
+╠➥ [🌎] MODO: ${self ? '*𝚙𝚛𝚒𝚟𝚊𝚍𝚘*' : '*𝚙𝚞𝚋𝚕𝚒𝚌𝚘*'}
+╠➥ [👨‍🦯] VELOCIDAD:  *${speed} MILISEGUNDOS*
+╠°°° El grupo oficial es:\n${urlgofc}
+╠═〘 *${wm}* 〙 ═
 `.trim() 
-conn.reply(m.chat, info, m, {
+const res = generateWAMessageFromContent(m.chat, {liveLocationMessage: {degreesLatitude: 19.663571, degreesLongitude: -99.068531, caption: info, sequenceNumber: "0", contextInfo: {mentionedJid: conn.parseMention(m.chat)}}}, {userJid: conn.user.jid, quoted: m})
+conn.relayMessage(m.chat, res.message, {mentions: conn.user.jid, quoted: m})
+/*conn.reply(m.chat, info, m, {
 contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, 
 title: 'INFO DEL BOT',
-body: 'ANI MX SCANS',         
-previewType: 0, thumbnail: fs.readFileSync("./Menu2.jpg"),
-Url: `https://www.facebook.com/ANIMxSCANS`}}})
+body: `${igfg} by ${namerepre}`,         
+previewType: 0, thumbnail: imagen1,
+sourceUrl: urlgofc}}})*/
 }
 handler.help = ['infobot', 'speed']
 handler.tags = ['info', 'tools']

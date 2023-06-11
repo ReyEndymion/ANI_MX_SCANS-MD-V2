@@ -10,7 +10,7 @@ let scircle = global.API('dzx', '/api/canvas/circle', { url })
 let stiker = await sticker(null, scircle, global.packname, global.author)
 conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, { asSticker: true })
 } catch (e) {
-m.reply('*[❗INFO❗] LO SIENTO, OCURRO UN ERROR, VUELVA A INTENTARLO,NO OLVIDE RESPONDER A UNA IMAGEN LA CUAL SE CONVERTIRA EN STICKER CIRCULAR*')
+m.reply('*[!INFO!] LO SIENTO, OCURRO UN ERROR, VUELVA A INTENTARLO, NO OLVIDE RESPONDER A UNA IMAGEN LA CUAL SE CONVERTIRA EN STICKER CIRCULAR*')
 }}
 handler.command = /^scircle|circle$/i
 export default handler

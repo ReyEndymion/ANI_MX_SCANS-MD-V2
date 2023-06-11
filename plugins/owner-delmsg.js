@@ -1,4 +1,3 @@
-import db from '../lib/database.js'
 let handler = async (m, { command, usedPrefix, text }) => {
 let which = command.replace(/eliminar/i, '')
 if (!text) throw `*[❗INFO❗] USAR ${usedPrefix}list${which} PARA VER LA LISTA*`

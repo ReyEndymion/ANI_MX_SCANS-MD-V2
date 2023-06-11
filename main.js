@@ -1,34 +1,20 @@
 // TODO: reduce global variabel usage
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
 process.on('uncaughtException', console.error)
 
 import './config.js';
-import { join } from 'path'
-import {
-  readdirSync,
-  statSync,
-  unlinkSync,
-} from 'fs'
-import {
-  spawn
-} from 'child_process'
-import {
-  tmpdir
-} from 'os'
-import {
-  protoType,
-  serialize
-} from './lib/simple.js'
-import {
-  plugins,
-  filesInit,
-  reload
-} from './lib/plugins.js'
+import path, { join } from 'path'
+import { writeFileSync, readdirSync, statSync, unlinkSync, existsSync, readFileSync, copyFileSync, watch, rmSync, readdir, stat } from 'fs';
+import yargs from 'yargs';
+import { spawn } from 'child_process';
+import chalk from 'chalk';
+import { tmpdir } from 'os';
+import { protoType, serialize } from './lib/simple.js';
+import { plugins, filesInit, reload} from './lib/plugins.js'
 import Connection from './lib/connection.js'
 import Helper from './lib/helper.js'
 import db, { loadDatabase } from './lib/database.js'
-import chalk from 'chalk'
 
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
@@ -67,8 +53,20 @@ if (!opts['test']) {
 }
 if (opts['server']) (await import('./server.js')).default(conn, PORT)
 
-
 function clearTmp() {
+  const tmpPath = join(__dirname, './tmp');
+  const filenames = readdirSync(tmpPath);
+
+  filenames.forEach((filename) => {
+    const filePath = join(tmpPath, filename);
+    const stats = statSync(filePath);
+
+    if (stats.isFile() && Date.now() - stats.mtimeMs >= 1000 * 60 * 3) {
+      unlinkSync(filePath); // Borra el archivo si ha pasado más de 3 minutos
+    }
+  });
+  }
+/*function clearTmp() {
   const tmp = [tmpdir(), join(__dirname, './tmp')]
   const filename = []
   tmp.forEach(dirname => readdirSync(dirname).forEach(file => filename.push(join(dirname, file))))
@@ -77,7 +75,7 @@ function clearTmp() {
     if (stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3)) return unlinkSync(file) // 3 minutes
     return false
   })
-}
+}*/
 
 Connection.conn.welcome = '*╔══════════════*\n*╟❧ @subject*\n*╠══════════════*\n*╟❧ @user*\n*╟❧ BIENVENIDO/A* \n*║*\n*╟❧ LEE LA DESC DEL GRUPO!*\n*║*\n*❧ DISFRUTA TU ESTADIA!!*\n*╚════════════*'
 Connection.conn.bye = '╔══════════════*\n*║〘 *ADIÓS* 〙*\n*╠══════════════*\n║*_☠ Se fue @user_*\n║*_Si no regresa..._*\n║ *_Nadie l@ va a extrañar 😇👍🏼_*\n*╚══════════════*'

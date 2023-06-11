@@ -1,4 +1,3 @@
-import db from '../lib/database.js'
 const free = 5000
 const prem = 20000
 

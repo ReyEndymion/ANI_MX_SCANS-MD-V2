@@ -1,4 +1,3 @@
-import db from '../lib/database.js'
 let handler = m => {
 let msgs = db.data.msgs
 m.reply(`

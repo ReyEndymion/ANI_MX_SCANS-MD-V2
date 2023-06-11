@@ -23,13 +23,12 @@ const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function (
 /**
  * Handle messages upsert
  * @this {import('./lib/connection').Socket}
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['messages.upsert']} chatUpdate
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['messages.upsert']} chatUpdate
  */
 export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
     if (!chatUpdate)
         return
-    this.pushMessage(chatUpdate.messages).catch(console.error)
     let m = chatUpdate.messages[chatUpdate.messages.length - 1]
     if (!m)
         return
@@ -310,7 +309,7 @@ export async function handler(chatUpdate) {
                 if (!('antiCall' in settings)) settings.antiCall = false
                 if (!('antiPrivate' in settings)) settings.antiPrivate = false
 	        if (!('modejadibot' in settings)) settings.modejadibot = true   
-            } else global.db.data.settings[this.user.jid] = {
+            } else db.data.settings[this.user.jid] = {
                 self: false,
                 autoread: false,
                 restrict: false,
@@ -639,7 +638,7 @@ export async function handler(chatUpdate) {
 /**
  * Handle groups participants update
  * @this {import('./lib/connection').Socket}
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate 
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate 
  */
 export async function participantsUpdate({ id, participants, action }) {
     if (opts['self']) return;
@@ -663,7 +662,8 @@ export async function participantsUpdate({ id, participants, action }) {
                     } finally {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || Connection.conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*SIN DESCRIPCION*') :
                             (chat.sBye || this.bye || Connection.conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                        this.sendMessage(id, {image: {url: pp}, caption: text, groupMetadata.subject}, 
+                        this.sendMessage(id, {image: {url: pp}, caption: text, //groupMetadata.subject
+                        }, 
                         /*this.sendHydrated(id, text, groupMetadata.subject, apii.data, 'https://github.com/ReyEndymion/Bot-Comedia-MD', 'GITHUB', null, null, [
                            */[(action == 'add' ? 'BIENVENIDO' : 'ADIOS'), 'ura'],
                         ['MENU PRINCIPAL', `#menu`], '', 
@@ -688,7 +688,7 @@ export async function participantsUpdate({ id, participants, action }) {
 /**
  * Handle groups update
  * @this {import('./lib/connection').Socket}
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate 
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate 
  */
 export async function groupsUpdate(groupsUpdate) {
     if (opts['self'])
@@ -709,7 +709,7 @@ export async function groupsUpdate(groupsUpdate) {
 
 /**
  * @this {import('./lib/connection').Socket}
- * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['messages.delete']} message 
+ * @param {import('@whiskeysockets/baileys').BaileysEventMap<unknown>['messages.delete']} message 
  */
 export async function deleteUpdate(message) {
     if (message.keys && Array.isArray(message.keys)) {

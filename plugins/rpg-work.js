@@ -1,9 +1,8 @@
 // creditos a https://github.com/FG98F
-import db from '../lib/database.js'
 let handler = async (m, { conn, isPrems}) => {
 let hasil = Math.floor(Math.random() * 5000)
 let time = db.data.users[m.sender].lastwork + 600000
-if (new Date - db.data.users[m.sender].lastwork < 600000) throw `*Estas cansado, debes descansar como minimo ${msToTime(time - new Date())} para volver a trabajar!*`
+if (new Date - db.data.users[m.sender].lastwork < 600000) throw `*Estás cansado debes descansar como mínimo ${msToTime(time - new Date())} para volver a trabajar!*`
 
 m.reply(`${pickRandom(global.work)} *${hasil} XP*`)
 db.data.users[m.sender].lastwork = new Date * 1

@@ -1,8 +1,10 @@
-let handler = async (m, { customPrefix, conn }) => {
-    let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender    
+let handler = m => m
+handler.before = async function (m) {
+    let chat = db.data.chats[m.chat]
+	let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender    
 
-    if (/^aclaración$/i.test(m.text)) {
-        m.reply(`🚨🚨🚨🚨🚨🚨🚨🚨🚨 *Esto no es un GRUPO, es un LOBBY de ingreso para un grupo de parejas y amistad entre gente con gustos en el anime, manga y cultura japonesa y asiática llamado: 
+    if (/aclaración$/i.test(m.text) && chat.asistente && !chat.isBanned) {
+ let resp = `🚨🚨🚨🚨🚨🚨🚨🚨🚨 *Esto no es un GRUPO, es un LOBBY de ingreso para un grupo de parejas y amistad entre gente con gustos en el anime, manga y cultura japonesa y asiática llamado: 
       *ㄖㄒ卂Ҡ凵丂*  
       *ㄒㄖᎶ乇ㄒ卄乇尺.*
       *Ser Otaku en Latinoamérica no es lo mismo que ser un Otaku nipón. Quien quiera estar en el grupo principal lo único que se les pide es lo siguiente:*
@@ -10,11 +12,11 @@ let handler = async (m, { customPrefix, conn }) => {
       💫 *ʙɪᴇɴᴠᴇɴɪᴅ@s ᴀ ᴇsᴛᴇ しᝪᗷᗷᎩ 🇦 🇶 🇺 🇮  ᴛɪᴇɴᴇɴ ᴜɴᴀ ꜰɪᴄʜᴀ ᴅᴇ ᴘʀᴇꜱᴇɴᴛᴀᴄɪᴏ́ɴ:* 💫
       🐉 *ɴᴏᴍʙʀᴇ* 🐉:
       🐉 *ᴇᴅᴀᴅ*🐉:
-       🐉 *ᴘᴀɪꜱ* 🐉:
+🐉 *ᴘᴀɪꜱ* 🐉:
       🐉 *Si eres otaku o no:* 🐉
       🐉 *ᴡᴀɪꜰᴜ ᴏ ʜᴜsʙᴀɴᴅᴏ*🐉:
       🐉 *ᴀɴɪᴍᴇ ꜰᴀᴠᴏʀɪᴛᴏ*🐉: 
-       🐉 *ᴍᴀɴɢᴀ ꜰᴀᴠᴏʀɪᴛᴏ* 🐉:
+🐉 *ᴍᴀɴɢᴀ ꜰᴀᴠᴏʀɪᴛᴏ* 🐉:
       🐉 *ᴅᴇꜱᴅᴇ ʜᴀᴄᴇ ᴄᴜÁɴᴛᴏ ᴇʀᴇꜱ ᴏᴛᴀᴋᴜ*🐉:
       🐉 *ꜰᴏᴛᴏ o un mensaje de voz*🐉:
       *ᴛᴏᴅᴀs ᴇsᴛᴀs ᴘʀᴇɢᴜɴᴛᴀs ᴘᴜᴇᴅᴇɴ sᴇʀ ʀᴇsᴘᴏɴᴅɪᴅᴀs ᴇɴ ᴘʀɪᴠᴀᴅᴏ*
@@ -32,38 +34,64 @@ let handler = async (m, { customPrefix, conn }) => {
       *Con nosotros pueden formar amistades y también contamos con un grupo de aportes sin tener que estar obligados a compartir contenido ya que tenemos más de 10 aportadores oficiales con contenido de anime y otro tipo de contenidos, también pueden formar parte de la asociación de grupos.*
       
       *También pueden hacer 10 mensajes a la semana para evitar ser eliminados... En algunos grupos el mínimo son 30 mensajes a la semana además de estar obligados a compartir contenido así que les conviene la propuesta de este grupo...*
-      🚨🚨🚨🚨🚨🚨🚨🚨🚨`)
+      🚨🚨🚨🚨🚨🚨🚨🚨🚨`.trim()
+let txt = '';
+let count = 0;
+for (const c of resp) {
+    await new Promise(resolve => setTimeout(resolve, 20));
+    txt += c;
+    count++;
+
+    if (count % 10 === 0) {
+        conn.sendPresenceUpdate('composing' , m.chat);
+    }
+}
+    await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} );
+
       } 
 
-    if (/^ficha$/i.test(m.text)) {
-        m.reply(	`*ɴᴏᴍʙʀᴇ*:
+    if (/^ficha$/i.test(m.text) && chat.asistente && !chat.isBanned) {
+let resp = 	
+`*ɴᴏᴍʙʀᴇ*:
+
+
+*ᴇᴅᴀᴅ*:
       
       
-       *ᴇᴅᴀᴅ*:
+*ᴘᴀÍꜱ* :
       
       
-       *ᴘᴀÍꜱ* :
+*ᴡᴀɪꜰᴜ ᴏ ʜᴜsʙᴀɴᴅᴏ*:
       
       
-       *ᴡᴀɪꜰᴜ ᴏ ʜᴜsʙᴀɴᴅᴏ*:
+*ᴀɴɪᴍᴇ ꜰᴀᴠᴏʀɪᴛᴏ*: 
       
       
-       *ᴀɴɪᴍᴇ ꜰᴀᴠᴏʀɪᴛᴏ*: 
+ *ᴍᴀɴɢᴀ ꜰᴀᴠᴏʀɪᴛᴏ* :
       
       
-        *ᴍᴀɴɢᴀ ꜰᴀᴠᴏʀɪᴛᴏ* :
+*ᴅᴇꜱᴅᴇ ʜᴀᴄᴇ ᴄᴜÁɴᴛᴏ ᴇʀᴇꜱ ᴏᴛᴀᴋᴜ*:
       
       
-       *ᴅᴇꜱᴅᴇ ʜᴀᴄᴇ ᴄᴜÁɴᴛᴏ ᴇʀᴇꜱ ᴏᴛᴀᴋᴜ*:
+*ꜰᴏᴛᴏ o ᴍᴇɴsᴀᴊᴇ ᴅᴇ ᴠᴏᴢ*:
       
       
-       *ꜰᴏᴛᴏ o ᴍᴇɴsᴀᴊᴇ ᴅᴇ ᴠᴏᴢ*:
+      **TODOS ESTOS DATOS PUEDEN SER EN PRIVADO SI QUIEREN CON ALGUNO DE LOS ADMINS ACTIVOS**`
+      let txt = '';
+      let count = 0;
+      for (const c of resp) {
+          await new Promise(resolve => setTimeout(resolve, 20));
+          txt += c;
+          count++;
       
-      
-      **TODOS ESTOS DATOS PUEDEN SER EN PRIVADO SI QUIEREN CON ALGUNO DE LOS ADMINS ACTIVOS**`)
+          if (count % 10 === 0) {
+              conn.sendPresenceUpdate('composing' , m.chat);
+          }
+      }
+          await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} );      
       } 
-      if (/^Moonficha| Sailorficha$/i.test(m.text)) {
-        m.reply(	`💫 *ʜᴏʟᴀ ʙɪᴇɴᴠᴇɴɪᴅ@ꜱ ᴀʟ ɢʀᴜᴘᴏ  ʏ ʙᴜᴇɴᴏ ᴀQᴜÍ ᴛɪᴇɴᴇ ᴜɴᴀ ꜰɪᴄʜᴀ ᴅᴇ ᴘʀᴇꜱᴇɴᴛᴀᴄɪÓɴ* 💫
+      if (/^Moonficha| Sailorficha|moon ficha$/i.test(m.text) && chat.asistente && !chat.isBanned) {
+ let resp = `💫 *ʜᴏʟᴀ ʙɪᴇɴᴠᴇɴɪᴅ@ꜱ ᴀʟ ɢʀᴜᴘᴏ  ʏ ʙᴜᴇɴᴏ ᴀQᴜÍ ᴛɪᴇɴᴇ ᴜɴᴀ ꜰɪᴄʜᴀ ᴅᴇ ᴘʀᴇꜱᴇɴᴛᴀᴄɪÓɴ* 💫
       
       
       1.💜 *ɴᴏᴍʙʀᴇ* 💜:
@@ -87,12 +115,39 @@ let handler = async (m, { customPrefix, conn }) => {
       7.💜 *ᴅᴇꜱᴅᴇ ʜᴀᴄᴇ ᴄᴜÁɴᴛᴏ ᴇʀᴇꜱ ᴏᴛᴀᴋᴜ*💜:
       
       
-      8.💜 *ꜰᴏᴛᴏ o ᴍᴇɴsᴀᴊᴇ ᴅᴇ ᴠᴏᴢ*💜:`)
+      8.💜 *ꜰᴏᴛᴏ o ᴍᴇɴsᴀᴊᴇ ᴅᴇ ᴠᴏᴢ*💜:`.trim()
+let txt = '';
+let count = 0;
+for (const c of resp) {
+    await new Promise(resolve => setTimeout(resolve, 20));
+    txt += c;
+    count++;
+
+    if (count % 10 === 0) {
+        conn.sendPresenceUpdate('composing' , m.chat);
+    }
+}
+    await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} );
+
       } 
     
-    if (/^No gracias$/i.test(m.text)) {
-    m.reply(`a Bueno @${who.split("@s.whatsapp.net")[0]} te me cuidas`)
-    }  
-return !0
+    if (/^No gracias$/i.test(m.text) && chat.asistente && !chat.isBanned) {
+      let resp = `a Bueno @${who.split("@s.whatsapp.net")[0]} te me cuidas`
+    
+let txt = '';
+let count = 0;
+for (const c of resp) {
+    await new Promise(resolve => setTimeout(resolve, 50));
+    txt += c;
+    count++;
+
+    if (count % 10 === 0) {
+        conn.sendPresenceUpdate('composing' , m.chat);
+    }
+}
+    await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} );
+
+    }   
+   
 }
 export default handler

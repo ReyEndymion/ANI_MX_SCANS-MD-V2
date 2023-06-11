@@ -1,6 +1,5 @@
 /* CREDITOS A https://github.com/FG98F */
 
-import db from '../lib/database.js'
 let handler = async (m, { args, usedPrefix, command }) => {
 let fa = `
 *[❗] INGRESA LA CANTIDAD QUE DESEA APOSTAR* 
@@ -13,9 +12,9 @@ let apuesta = parseInt(args[0])
 let users = db.data.users[m.sender]
 let time = users.lastslot + 10000
 if (new Date - users.lastslot < 10000) throw `*⏳ ESPERE ${msToTime(time - new Date())} PARA VOLVER A APOSTAR*`
-if (apuesta < 100) throw '*[❗] EL MINIMO PARA APOSTAR ES DE 𝟷00 XP*'
+if (apuesta < 100) throw '*[❗] EL MINIMO PARA APOSTAR ES DE 100 XP*'
 if (users.exp < apuesta) {
-throw `*[❗] TU XP NO ES SUFICIENTE PARA APOSTAR ESA CANTIDAD, 𝙹UEGA OTROS JUEGOS O INTERACTUA CON EL BOT PARA GANAR MAS XP*`
+throw `*[❗] TU XP NO ES SUFICIENTE PARA APOSTAR ESA CANTIDAD, JUEGA OTROS JUEGOS O INTERACTUA CON EL BOT PARA GANAR MAS XP*`
 }
 let emojis = ["🐋", "🐉", "🕊️"];
 let a = Math.floor(Math.random() * emojis.length);
