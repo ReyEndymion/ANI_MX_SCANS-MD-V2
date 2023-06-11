@@ -1,9 +1,15 @@
-audio/
-/.circleci/
-sessions/
+#| Folders |#
 node_modules/
-Backup-Sessions/
-tmp/
-data.store.json
+Moviles/
+ANI_MX_SCANS/
+ANIMXSCANS/
+sesionRespaldo/
+/.git/
+#| Files |#
+creds.json
 database.json
-yarn-error.log
+BotComedia.data.json
+session.data.json
+ANI_MX_SCANS-MD.zip
+package-lock.json
+ANIMXSCANS.zip
