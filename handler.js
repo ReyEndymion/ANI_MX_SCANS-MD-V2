@@ -10,7 +10,10 @@ import printMessage from './lib/print.js'
 import Helper from './lib/helper.js'
 import db, { loadDatabase } from './lib/database.js'
 
-// const { proto } = (await import('@adiwajshing/baileys')).default
+/**
+ * @type {import('@whiskeysockets/baileys')}
+ */
+const { proto } = (await import('@whiskeysockets/baileys')).default
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function () {
     clearTimeout(this)
@@ -26,6 +29,7 @@ export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
     if (!chatUpdate)
         return
+    this.pushMessage(chatUpdate.messages).catch(console.error)
     let m = chatUpdate.messages[chatUpdate.messages.length - 1]
     if (!m)
         return
@@ -247,40 +251,33 @@ export async function handler(chatUpdate) {
             let chat = db.data.chats[m.chat]
             if (typeof chat !== 'object')
                 db.data.chats[m.chat] = {}
-            if (chat) {                if (!('isBanned' in chat))
-                    chat.isBanned = false
-                if (!('welcome' in chat))
-                    chat.welcome = true
-                if (!('detect' in chat))
-                    chat.detect = true
-                if (!('sWelcome' in chat))
-                    chat.sWelcome = ''
-                if (!('sBye' in chat))
-                    chat.sBye = ''
-                if (!('sPromote' in chat))
-                    chat.sPromote = ''
-                if (!('sDemote' in chat))
-                    chat.sDemote = ''
-                if (!('delete' in chat))
-                    chat.delete = true
-                if (!('modohorny' in chat))
-                    chat.modohorny = false    
-                if (!('autosticker' in chat))
-                    chat.autosticker = false                    
-                if (!('audios' in chat))
-                    chat.audios = false                            
-                if (!('antiLink' in chat))
-                    chat.antiLink = false
-                if (!('antiLink2' in chat))
-                    chat.antiLink2 = false
-                if (!('antiviewonce' in chat))
-                    chat.antiviewonce = false
-                if (!('antiToxic' in chat))
-                    chat.antiToxic = false
-                if (!isNumber(chat.expired))
-                    chat.expired = 0
+            if (chat) {
+                if (!('isBanned' in chat)) chat.isBanned = false
+                if (!('welcome' in chat)) chat.welcome = true
+                if (!('detect' in chat)) chat.detect = true
+                if (!('sWelcome' in chat)) chat.sWelcome = ''
+                if (!('sBye' in chat)) chat.sBye = ''
+                if (!('sPromote' in chat)) chat.sPromote = ''
+                if (!('sDemote' in chat)) chat.sDemote = ''
+                if (!('delete' in chat)) chat.delete = true
+                if (!('modohorny' in chat)) chat.modohorny = false    
+                if (!('autosticker' in chat)) chat.autosticker = false                    
+                if (!('audios' in chat)) chat.audios = false                            
+                if (!('antiLink' in chat)) chat.antiLink = false
+                if (!('antiLink2' in chat)) chat.antiLink2 = false
+                if (!('antiviewonce' in chat)) chat.antiviewonce = false
+                if (!('antiToxic' in chat)) chat.antiToxic = false
+                if (!('antiTraba' in chat)) chat.antiTraba = false
+                if (!('antiArab' in chat)) chat.antiArab = false
+                if (!('modoadmin' in chat)) chat.modoadmin = false
+				if (!('simi' in chat)) chat.simi = false     
+                if (!('stickers' in chat)) chat.stickers = false     
+                if (!('asistente' in chat)) chat.asistente = false
+                if (!('gRol' in chat)) chat.gruposRol = false
+                if (!isNumber(chat.expired)) chat.expired = 1
             } else
-                db.data.chats[m.chat] = {                    isBanned: false,
+                db.data.chats[m.chat] = {
+                    isBanned: false,
                     welcome: true,
                     detect: true,
                     sWelcome: '',
@@ -295,6 +292,13 @@ export async function handler(chatUpdate) {
                     antiLink2: false,
                     antiviewonce: false,
                     antiToxic: false,
+                    antiTraba: false,
+                    antiArab: false,
+                    modoadmin: false,
+	            	simi: false,
+                    stickers: true,
+                    asistente: false,
+                    gruposRol: false,
                     expired: 0,
                 }
             let settings = db.data.settings[this.user.jid]
@@ -303,10 +307,16 @@ export async function handler(chatUpdate) {
                 if (!('self' in settings)) settings.self = false
                 if (!('autoread' in settings)) settings.autoread = false
                 if (!('restrict' in settings)) settings.restrict = false
-            } else db.data.settings[this.user.jid] = {
+                if (!('antiCall' in settings)) settings.antiCall = false
+                if (!('antiPrivate' in settings)) settings.antiPrivate = false
+	        if (!('modejadibot' in settings)) settings.modejadibot = true   
+            } else global.db.data.settings[this.user.jid] = {
                 self: false,
                 autoread: false,
-                restrict: false
+                restrict: false,
+                antiCall: false,
+                antiPrivate: false,
+                modejadibot: true,
             }
         } catch (e) {
             console.error(e)
@@ -451,6 +461,11 @@ export async function handler(chatUpdate) {
                     if (name != 'owner-unbanuser.js' && user?.banned)
                         return
                 }
+	        let hl = _prefix 
+                let adminMode = db.data.chats[m.chat].modoadmin
+                let animxscans = `${plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || hl ||  m.text.slice(0, 1) == hl || plugin.command}`
+                if (adminMode && !isOwner && !isROwner && m.isGroup && !isAdmin && animxscans) return   
+		    
                 if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
                     fail('owner', m, this)
                     continue
@@ -500,7 +515,7 @@ export async function handler(chatUpdate) {
                     continue // Limit habis
                 }
                 if (plugin.level > _user.level) {
-                    this.reply(m.chat, `*¡SE REQUIERE EL NIVEL! ${plugin.level} PARA USAR ESTE COMANDO. TU NIVEL ES ${_user.level}*`, m)
+                    this.reply(m.chat, `*[❗INFO ❗] SE REQUIERE EL NIVEL ${plugin.level} PARA USAR ESTE COMANDO. TU NIVEL ES ${_user.level}*`, m)
                     continue // If the level has not been reached
                 }
                 let extra = {
@@ -612,9 +627,9 @@ export async function handler(chatUpdate) {
             console.log(m, m.quoted, e)
         }
         if (opts['autoread'])
-           await this.readMessages([m.key])
+            await this.readMessages([m.key])
         
-       if (!m.fromMem && m.text.match(/(Rey Endymion|@5215533827255|ANIMXSCANS|ANI MX SCANS)/gi)) {
+       if (!m.fromMem && m.text.match(/(Rey Endymion|@5215517489568|@5215533827255|ANIMXSCANS|ANI MX SCANS)/gi)) {
         let emot = pickRandom(["🎃", "❤", "😘", "😍", "💕", "😎", "🙌", "⭐", "👻", "🔥"])
         this.sendMessage(m.chat, { react: { text: emot, key: m.key }})}
         function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}
@@ -627,14 +642,14 @@ export async function handler(chatUpdate) {
  * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate 
  */
 export async function participantsUpdate({ id, participants, action }) {
-    if (opts['self'])
-        return
-    if (this.isInit)
-        return
-    if (db.data == null)
-        await loadDatabase()
-    let chat = db.data.chats[id] || {}
-    let text = ''
+    if (opts['self']) return;
+    if (this.isInit) return;
+    // if (id in conn.chats) return // First login will spam
+    if (db.data == null) await loadDatabase();
+  
+    let chat = db.data.chats[id] || {};
+    let text = '';
+  
     switch (action) {
         case 'add':
         case 'remove':
@@ -648,7 +663,7 @@ export async function participantsUpdate({ id, participants, action }) {
                     } finally {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || Connection.conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*SIN DESCRIPCION*') :
                             (chat.sBye || this.bye || Connection.conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                        this.sendButton(id, text, groupMetadata.subject, pp, 
+                        this.sendMessage(id, {image: {url: pp}, caption: text, groupMetadata.subject}, 
                         /*this.sendHydrated(id, text, groupMetadata.subject, apii.data, 'https://github.com/ReyEndymion/Bot-Comedia-MD', 'GITHUB', null, null, [
                            */[(action == 'add' ? 'BIENVENIDO' : 'ADIOS'), 'ura'],
                         ['MENU PRINCIPAL', `#menu`], '', 
