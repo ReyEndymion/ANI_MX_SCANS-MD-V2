@@ -2,20 +2,33 @@
   "name": "ANI MX SCANS-MD-V2",
   "description": "https://www.facebook.com/ANIMxSCANS",
   "repository": "https://github.com/ReyEndymion/ANI_MX_SCANS-MD",
-  "logo": "https://scontent.fmex43-1.fna.fbcdn.net/v/t1.6435-9/87006005_104034521189587_3668669375281364992_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeFhRM5lzf9cs1biLt6s-ZqqXid_QEUrlzFeJ39ARSuXMabo08mTTbVeeTzoRIwvAed_gxpfCESDZW3nKDbE6dvI&_nc_ohc=5Zo2daIqy58AX9ArIZc&_nc_ht=scontent.fmex43-1.fna&oh=00_AT9OA9jejnlGEgCCFeXAoOv1cqVJ2l4DfuDPJQqfw200kA&oe=62F9A2CE",
-  "keywords": ["java", "bot", "whatsapp-bot", "whatsapp-automation"],
+  "logo": "https://raw.githubusercontent.com/ReyEndymion/ANI_MX_SCANS-MD/master/Menu2.jpg",
+  "keywords": [
+    "nodejs",
+  	"javascript",
+    "heroku",
+    "bot",
+    "bots",
+    "bot",
+    "spanish",
+    "whatsapp-bot",
+    "termux",
+    "shadow",
+    "multi-device",
+    "md",
+    "whatsappbot",
+    "oficial",
+    "whatsapp-automation"],
+    "whatsapp-md",
   "buildpacks": [
-  {
-    "url": "heroku/nodejs"
-  },
-  {
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
-  },
-  {
-    "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
-  },
-  {
-    "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-  }    
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/bogini/heroku-buildpack-graphicsmagick"
+    }    
  ]
 }
