@@ -1,7 +1,7 @@
-# 2.1.0 (2023-06-11)
+# 2.1.0 (2023-06-12)
 
 
-### Corrección de errores
+### ANI MX SCANS V2 Actualización
 
 
 
