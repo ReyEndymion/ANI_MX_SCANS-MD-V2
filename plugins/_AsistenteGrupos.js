@@ -30,7 +30,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/buen día|buen dia|hola|Bu
 let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -48,7 +48,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/^Quién eres?$/gi)) {
   let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -67,7 +67,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/eres un bot$/i)) {
         let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -85,7 +85,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/Lenin|creador$/gi)) {
 let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -103,7 +103,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/Quién es Rey Endymion$/gi
        let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -138,7 +138,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/K.I.R.R.|kirr|^kirr$/g)) {
         let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -158,7 +158,7 @@ Por cierto soy un asistente virtual en este grupo, para más detalles invoca a u
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -177,7 +177,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/admin$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -194,7 +194,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/Otakus Together$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -213,7 +213,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/Otakus TogetherS$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -232,7 +232,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/^otakus forever$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -251,7 +251,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/^otakus always$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -269,7 +269,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/nombre del grupo de sailor
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -303,7 +303,7 @@ Cómo requisito para permanecer en ese grupo tienen que estar en este grupo...
 let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -339,7 +339,7 @@ https://chat.whatsapp.com/DhvxhmZ4lMkLppU0obHWp4
 let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -363,7 +363,7 @@ No serán eliminados sí por lo menos tienen un solo mensaje en toda la semana y
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -381,7 +381,7 @@ if (!chat.isBanned && chat.asistente && m.text.match(/contador 0$/gi)) {
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -417,7 +417,7 @@ https://facebook.com/groups/849679409107132`
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -473,7 +473,7 @@ Ahí se les realizará una entrevista dónde tendrán que responder las siguient
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -493,7 +493,7 @@ Busca otro tipo de chats o habla con otros administradores a ver qué te sugiere
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 
@@ -515,7 +515,7 @@ No sé puede volver a iniciar sesión con QR`
       let int = '';
 let count = 0;
 for (const c of resp) {
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 20));
     int += c;
     count++;
 

@@ -12,8 +12,9 @@ import db, { loadDatabase } from './lib/database.js'
 global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString() }; global.__dirname = function dirname(pathURL) { return path.dirname(global.__filename(pathURL, true)) }; global.__require = function require(dir = import.meta.url) { return createRequire(dir) }
 const __dirname = global.__dirname(import.meta.url)
 global.owner = [
-   ['5215517489568','𝓢𝓾𝓹𝓻𝓮𝓶𝓮 𝓔𝓷𝓭𝔂𝓶𝓲𝓸𝓷 - Creador 👁️', false],
-    ['5215533827255', '𝓡𝓮𝔂 𝓔𝓷𝓭𝔂𝓶𝓲𝓸𝓷 - Creador 👑', true]
+   ['5215517489568', '𝓢𝓾𝓹𝓻𝓮𝓶𝓮 𝓔𝓷𝓭𝔂𝓶𝓲𝓸𝓷 - Creador 👁️', false],
+   ['5215533827255', '𝓡𝓮𝔂 𝓔𝓷𝓭𝔂𝓶𝓲𝓸𝓷 - Creador 👑', true],
+    ['593968585383', 'Nina-Gatabot - colaboradora', true]
 ] // Cambia los numeros que quieras
 
 global.packname = '(☞ﾟ∀ﾟ)☞'
@@ -63,7 +64,8 @@ global.APIKeys = {
   'https://api-fgmods.ddns.net': 'fg-dylux',
   'https://api.botcahx.biz.id': 'Admin'
 }
-
+/***************GLOBAL CONFIG****************/
+global.conn = this
 global.db = db
 global.loadDatabase = (db.data == null)? loadDatabase() : db.data
 global.raiz = './'
@@ -99,7 +101,8 @@ global.cheerio = cheerio
 global.fs = fs
 global.fetch = fetch
 global.axios = axios
-global.moment = moment	
+global.moment = moment
+/****************GLOBAL CONFIG USERS********************** */	
 global.rpg = {
 emoticon(string) {
 string = string.toLowerCase()
@@ -174,7 +177,7 @@ let emot = {
       kambing: '🐐 Cabra',
       kerbau: '🐃 Búfalo',
       lion: '🦁 León',
-      money: '👾 MysticCoins',
+      money: '🪙 MysticCoins',
       monyet: '🐒 Mono',
       panda: '🐼 Panda',
       snake: '🐍 Serpiente',
@@ -267,7 +270,7 @@ string = string.toLowerCase()
       kambing: '🐐',
       kerbau: '🐃',
       lion: '🦁',
-      money: '👾',
+      money: '🪙',
       monyet: '🐒',
       panda: '🐼',
       snake: '🐍',
@@ -298,7 +301,7 @@ string = string.toLowerCase()
       berlian: '♦️ Joya',
       kyubi: '🌀 Magia',
       gold: '👑 Oro',
-      money: '👾 MysticCoins',
+      money: '🪙 MysticCoins',
       tiketcoin: '🎫 mystic Tickers',
       stamina: '✨ Energía',
       potion: '🥤 Poción',
@@ -375,7 +378,7 @@ global.rpgshopp = { //Tienda
       berlian: '♦️',
       kyubi: '🌀',
       gold: '👑',
-      money: '👾',
+      money: '🪙',
       tiketcoin: '🎫',
       stamina: '✨',
       potion: '🥤',
@@ -440,7 +443,8 @@ let results = Object.keys(emotttt).map(v => [v, new RegExp(v, 'gi')]).filter(v =
 if (!results.length) return ''
 else return emotttt[results[0][0]]
 }}	
-	
+global.multiplier = 99
+/***Configuración de logotipos******* */	
 global.flaaa = [
 'https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=water-logo&script=water-logo&fontsize=90&doScale=true&scaleWidth=800&scaleHeight=500&fontsize=100&fillTextColor=%23000&shadowGlowColor=%23000&backgroundColor=%23000&text=',
 'https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=crafts-logo&fontsize=90&doScale=true&scaleWidth=800&scaleHeight=500&text=',
@@ -455,13 +459,16 @@ global.fecha = d.toLocaleDateString('es', { day: 'numeric', month: 'numeric', ye
 global.mes = d.toLocaleDateString('es', { month: 'long' })
 global.año = d.toLocaleDateString('es', { year: 'numeric' })
 global.tiempo = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
+global.botdate = `⫹⫺ Date :  ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}` //Asia/Jakarta
+global.bottime = `𝗧 𝗜 𝗠 𝗘 : ${moment.tz('America/Los_Angeles').format('HH:mm:ss')}`//America/Los_Angeles
 //*****************************
-global.wm2 = `▸ ${dia} ${fecha}\n▸ 🌎ANI MX SCANS🌏`
+global.wm2 = `▸ ${dia} ${fecha}\n${igfg}`
 global.wait = '*⌛ _Cargando, aguarde un momento..._ ▬▬▬▭*'
 global.waitt = '*[❗] _Cargando, aguarde un momento..._*'
 global.waittt = '*[❗] _Cargando, aguarde un momento..._*'
 global.waitttt = '*[❗] _Cargando, aguarde un momento..._*'
 global.pdoc = ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/msword', 'application/pdf', 'text/rtf']
+/****************FORMATO DE MENUS***************** */
 global.cmenut = '❖––––––『'
 global.cmenub = '┊✦ '
 global.cmenuf = '╰━═┅═━––––––๑\n'
@@ -475,15 +482,16 @@ global.htki = '*⭑•̩̩͙⊱•••• ☪*'
 global.htka = '*☪ ••••̩̩͙⊰•⭑*'
 global.comienzo = '• • ◕◕════'
 global.fin = '════◕◕ • •'
-global.botdate = `⫹⫺ Date :  ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}` //Asia/Jakarta
-global.bottime = `𝗧 𝗜 𝗠 𝗘 : ${moment.tz('America/Los_Angeles').format('HH:mm:ss')}`//America/Los_Angeles
-global.fgif = {key: { participant : '0@s.whatsapp.net'}, message: { "videoMessage": { "title": wm, "h": `Hmm`, 'seconds': '999999999',  'gifPlayback': 'true',  'caption': bottime, 'jpegThumbnail': fs.readFileSync('./Menu.png')}}}
-global.multiplier = 99
-/*************************/
-
-//global.suittag = ['5215532867844'] 
+/**********global tags***************/
+global.userID = `@s.whatsapp.net`
+global.groupID = '@g.us'
+global.suittag = ['5215532867844'] 
 global.espadmins = [['5215532867844'], ['5213328673075'], ['5215560065619'], ['50581492411'], ['50237822582'],['5212411719937'], ['50582438276'], ['50372982101'], ['59162618066'], ['5213531275886'], ['5213326820930'], ['584128927527'], ['573206049511'], ['50763057799'], ['5217443714420'], ['12246057118'], ['51984122833'], ['573108715954'], ['5215613310013'], ['573132928488'], ['5219842545994'], ['5219842504743'], ['51969664348'], ['528442677056'], ['5218444999765'], ['5217712009688'], ['573206279063'], ['5219991307200'], ['59161545885'], ['5219616650861'], ['573105436190'], ['51901786322'], ['5219992698701'], ['573166730283'], ['5214191056589'], ['5213322708837'], ['14192396562'], ['5217292331176'], ['5214775190562'], ['5215587486329'], ['12232308954'], ['34641526429'], ['573175070854'], ['5215618937690'], ['50257602757'], ['593979173410'], ['573172517283'], ['59169283414'],['5214423933594']]
 global.prems = ['5215532867844'] 
+/********QUOTEDS*************** */
+global.fgif = {key: { participant : '0@s.whatsapp.net'}, message: { "videoMessage": { "title": wm, "h": `Hmm`, 'seconds': '999999999',  'gifPlayback': 'true',  'caption': bottime, 'jpegThumbnail': imagen4}}}
+global.estado = {key: {participant: '0@s.whatsapp.net', remoteJid: '0@s.whatsapp.net'}, message: {groupInviteMessage: {groupJid: "1234567890-9876543210@g.us", inviteCode: `\n`, groupName: groupID, caption: `${userID}\n${igfg}`, jpegThumbnail: imagen2}}}
+global.q = { key: { fromMe: false, participant: userID, ...(false ? { remoteJid: "9876543210-0123456789@g.us" } : {}) }, message: { extendedTextMessage: { text: '', title: wm, 'jpegThumbnail': null }}}
 
 let file = fileURLToPath(import.meta.url)
 watchFile(file, () => {
