@@ -1,3 +1,5 @@
+import path, { join } from 'path'
+import fs from 'fs'
 let handler = async (m, { conn }) => {
 if (!db.data.chats[m.chat].audios && m.isGroup) throw 0
 let vn = media + 'a.mp3'
@@ -6,7 +8,7 @@ async function ejecutarEnIntervalo() {
     }
     const intervalID = setInterval(ejecutarEnIntervalo, 1 * 100);
     await new Promise(resolve => setTimeout(resolve, 20 * 100));
-conn.sendMessage(m.chat, { audio: { url: vn }, seconds: '3600', ptt: true, mimetype: 'audio/mpeg', fileName: `a.mp3` }, { quoted: m, ephemeralExpiration: 24*60*1000 })
+conn.sendMessage(m.chat, { audio: { url: vn }, seconds: '3600', ptt: true, mimetype: 'audio/mpeg', fileName: `${wm}` }, { quoted: m, ephemeralExpiration: 24*60*1000 })
 clearInterval(intervalID);
 }
 handler.customPrefix = /ª|a|A/

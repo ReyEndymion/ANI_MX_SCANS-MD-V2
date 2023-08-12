@@ -1,8 +1,9 @@
 import path, { join } from 'path'
 import fs from 'fs'
-let handler = async (m, { conn, text, customPrefix }) => {
+let handler = async (m, { conn, text }) => {
 let chat = db.data.chats[m.chat]
-console.log('esto da aqui: ', m.text)
+//let int = new RegExp[m.text, '']
+console.log('esto da aqui: ', int)
 if (/^hola$/i.test(m.text) && chat.audios && !chat.isBanned) {
 let vn = media + 'Hola.mp3'
 async function ejecutarEnIntervalo() {
@@ -465,7 +466,6 @@ clearInterval(intervalID);
 }
    
 }
-handler.customPrefix = new RegExp
+handler.customPrefix = new RegExp[/ /, 'ig']
 handler.command = / /
 export default handler
-console.log ('esto dice aca: ', handler, / /)

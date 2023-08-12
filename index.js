@@ -1,12 +1,12 @@
-console.log('Iniciando...')
-
+console.log('✅ㅤIniciando...')
 import { join, dirname } from 'path'
-import { createRequire } from 'module'
+import { createRequire } from 'module';
 import { fileURLToPath } from 'url'
 import { setupMaster, fork } from 'cluster'
 import { watchFile, unwatchFile } from 'fs'
 import cfonts from 'cfonts';
 import { createInterface } from 'readline'
+import yargs from 'yargs'
 import Helper from './lib/helper.js'
 
 // https://stackoverflow.com/a/50052194
@@ -16,7 +16,7 @@ const { name, author } = require(join(__dirname, './package.json')) // https://w
 const { say } = cfonts
 const rl = createInterface(process.stdin, process.stdout)
 
-say('ANI MX SCANS\nWhatsApp - Bot - MD', {
+say('🌎ANI MX SCANS🌏 V2\nWhatsApp - Bot - MD', {
   font: 'chrome',
   align: 'center',
   gradient: ['red', 'magenta']
@@ -28,6 +28,7 @@ say(`'${name}' By @${author.name || author}`, {
 })
 
 var isRunning = false
+
 /**
  * Start a js file
  * @param {String} file `path/to/file`
@@ -36,11 +37,13 @@ function start(file) {
   if (isRunning) return
   isRunning = true
   let args = [join(__dirname, file), ...process.argv.slice(2)]
-  say('Bot de promocion del proyecto de traduccion de manga ANI MX SCANS\n\nAjuste la pantalla para escanear el codigo QR', {
+
+  say('Bot de promocion del proyecto de traduccion de manga 🌎ANI MX SCANS🌏\n\nAjuste la pantalla para escanear el codigo QR', {
     font: 'console',
     align: 'center',
     gradient: ['red', 'magenta']
   })
+
   setupMaster({
     exec: args[0],
     args: args.slice(1),
@@ -62,17 +65,30 @@ function start(file) {
   p.on('exit', (_, code) => {
     isRunning = false
     console.error('Ocurrio un error inesperado:', code)
-    if (code === 0) return
+    if (code === 0){ 
     watchFile(args[0], () => {
       unwatchFile(args[0])
       start(file)
     })
+    p.process.kill()
+   } else if (process.env.pm_id) {
+      process.exit(1)
+    } else {
+      process.exit()
+      //stop('reset', 'crash')
+    }
   })
-  if (!Helper.opts['test'])
+
+  let opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+  if (!Helper.opts['test']) {
     if (!rl.listenerCount()) rl.on('line', line => {
       p.emit('message', line.trim())
     })
   // console.log(p)
-}
+} else if (!opts['test'])
+    if (!rl.listenerCount()) rl.on('line', line => {
+  p.emit('message', line.trim())
+})
 
+}
 start('main.js')

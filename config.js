@@ -177,7 +177,7 @@ let emot = {
       kambing: '🐐 Cabra',
       kerbau: '🐃 Búfalo',
       lion: '🦁 León',
-      money: '🪙 MysticCoins',
+      money: '🪙 ANICoins',
       monyet: '🐒 Mono',
       panda: '🐼 Panda',
       snake: '🐍 Serpiente',
@@ -301,7 +301,7 @@ string = string.toLowerCase()
       berlian: '♦️ Joya',
       kyubi: '🌀 Magia',
       gold: '👑 Oro',
-      money: '🪙 MysticCoins',
+      money: '🪙 ANICoins',
       tiketcoin: '🎫 mystic Tickers',
       stamina: '✨ Energía',
       potion: '🥤 Poción',
@@ -459,8 +459,6 @@ global.fecha = d.toLocaleDateString('es', { day: 'numeric', month: 'numeric', ye
 global.mes = d.toLocaleDateString('es', { month: 'long' })
 global.año = d.toLocaleDateString('es', { year: 'numeric' })
 global.tiempo = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })
-global.botdate = `⫹⫺ Date :  ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}` //Asia/Jakarta
-global.bottime = `𝗧 𝗜 𝗠 𝗘 : ${moment.tz('America/Los_Angeles').format('HH:mm:ss')}`//America/Los_Angeles
 //*****************************
 global.wm2 = `▸ ${dia} ${fecha}\n${igfg}`
 global.wait = '*⌛ _Cargando, aguarde un momento..._ ▬▬▬▭*'
@@ -482,11 +480,65 @@ global.htki = '*⭑•̩̩͙⊱•••• ☪*'
 global.htka = '*☪ ••••̩̩͙⊰•⭑*'
 global.comienzo = '• • ◕◕════'
 global.fin = '════◕◕ • •'
-/**********global tags***************/
+global.botdate = `⫹⫺ Date :  ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}` //Asia/Jakarta
+global.bottime = `𝗧 𝗜 𝗠 𝗘 : ${moment.tz('America/Los_Angeles').format('HH:mm:ss')}`//America/Los_Angeles
+global.fgif = {key: { participant : '0@s.whatsapp.net'}, message: { "videoMessage": { "title": wm, "h": `Hmm`, 'seconds': '999999999',  'gifPlayback': 'true',  'caption': bottime, 'jpegThumbnail': fs.readFileSync('./Menu.png')}}}
+global.multiplier = 99
+/*********GLOBAL TAGS****************/
 global.userID = `@s.whatsapp.net`
 global.groupID = '@g.us'
-global.suittag = ['5215532867844'] 
-global.espadmins = [['5215532867844'], ['5213328673075'], ['5215560065619'], ['50581492411'], ['50237822582'],['5212411719937'], ['50582438276'], ['50372982101'], ['59162618066'], ['5213531275886'], ['5213326820930'], ['584128927527'], ['573206049511'], ['50763057799'], ['5217443714420'], ['12246057118'], ['51984122833'], ['573108715954'], ['5215613310013'], ['573132928488'], ['5219842545994'], ['5219842504743'], ['51969664348'], ['528442677056'], ['5218444999765'], ['5217712009688'], ['573206279063'], ['5219991307200'], ['59161545885'], ['5219616650861'], ['573105436190'], ['51901786322'], ['5219992698701'], ['573166730283'], ['5214191056589'], ['5213322708837'], ['14192396562'], ['5217292331176'], ['5214775190562'], ['5215587486329'], ['12232308954'], ['34641526429'], ['573175070854'], ['5215618937690'], ['50257602757'], ['593979173410'], ['573172517283'], ['59169283414'],['5214423933594']]
+//global.suittag = ['5215532867844'] 
+global.espadmins = [
+  ['50237822582'],
+  ['50257602757'], 
+  ['50372982101'], 
+  ['50581492411'], 
+  ['50582438276'], 
+  ['50763057799'], 
+  ['51901786322'], 
+  ['51984122833'], 
+  ['51969664348'], 
+  ['5212411719937'], 
+  ['5213322708837'], 
+  ['5213326820930'], 
+  ['5213328673075'], 
+  ['5213531275886'], 
+  ['5214191056589'], 
+  ['5214775190562'], 
+  ['5215532867844'], 
+  ['5215560065619'], 
+  ['5215587486329'], 
+  ['5215613310013'], 
+  ['5215618937690'], 
+  ['5214423933594'], 
+  ['5217292331176'], 
+  ['5217443714420'], 
+  ['5217712009688'], 
+  ['5218442677056'], 
+  ['5218444999765'], 
+  ['5219616650861'], 
+  ['5219842504743'], 
+  ['5219842545994'], 
+  ['5219991307200'], 
+  ['5219992698701'], 
+  ['573132928488'], 
+  ['573206049511'], 
+  ['573172517283'], 
+  ['573108715954'], 
+  ['573175070854'], 
+  ['573206279063'], 
+  ['573105436190'], 
+  ['573166730283'], 
+  ['584128927527'], 
+  ['59161545885'], 
+  ['59162618066'], 
+  ['59169283414'], 
+  ['593979173410'], 
+  ['34641526429'], 
+  ['14192396562'], 
+  ['12232308954'], 
+  ['12246057118']
+  ]
 global.prems = ['5215532867844'] 
 /********QUOTEDS*************** */
 global.fgif = {key: { participant : '0@s.whatsapp.net'}, message: { "videoMessage": { "title": wm, "h": `Hmm`, 'seconds': '999999999',  'gifPlayback': 'true',  'caption': bottime, 'jpegThumbnail': imagen4}}}
